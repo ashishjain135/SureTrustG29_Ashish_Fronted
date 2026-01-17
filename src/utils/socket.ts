@@ -3,5 +3,7 @@ import { baseUrl } from '../baseUrl'
 
 
 export const socket = io(`${baseUrl}`,{
-    autoConnect:false
-})
+    path: "/socket.io",
+    transports: ["polling", "websocket"],
+    autoConnect:true
+});

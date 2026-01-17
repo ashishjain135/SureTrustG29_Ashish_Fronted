@@ -34,6 +34,22 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
 
   const token = localStorage.getItem("token");
 
+  /* ---------- SOCKET connection check ---------- */
+  useEffect(() => {
+  socket.on("connect", () => {
+    console.log("✅ SOCKET CONNECTED", socket.id);
+  });
+
+  socket.on("connect_error", (err) => {
+    console.error("❌ SOCKET ERROR", err.message);
+  });
+
+  socket.on("disconnect", (reason) => {
+    console.log("⚠️ SOCKET DISCONNECTED", reason);
+  });
+}, []);
+
+
   /* ---------- SOCKET SETUP ---------- */
   useEffect(() => {
     // socket.connect();
