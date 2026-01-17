@@ -36,7 +36,7 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
 
   /* ---------- SOCKET SETUP ---------- */
   useEffect(() => {
-    socket.connect();
+    // socket.connect();
     socket.emit("setup", token);
 
     socket.on("receive_message", (msg) => {
@@ -46,7 +46,7 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
 
     return () => {
       socket.off("receive_message");
-      socket.disconnect();
+      // socket.disconnect();
     };
   }, [token]); // Added dependency
 
@@ -86,7 +86,7 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
     if (!text.trim() || !selectedUser) return;
 
     socket.emit("send_message", {
-      from: token,
+      // from: token,
       to: selectedUser._id,
       message: text,
     });
