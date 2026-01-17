@@ -1,1 +1,1 @@
-export const baseUrl = "https://suretrustg29fsd-ashish.onrender.com";
+export const baseUrl = "https://suretrustg29fsd-ashish.onrender.com/api";
