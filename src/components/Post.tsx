@@ -3,7 +3,7 @@ import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
 interface Comment {
-  id: string;
+  _id: string;
   text: string;
 }
 
@@ -34,24 +34,38 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [commentText, setCommentText] = useState("");
+  const [localComments, setLocalComments] = useState(comments || []);
+
 
   // Fixed: Removed unused 'comment' state and console.log
 
-  const handleAddComment = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  /* -------------------------- Add a comment -------------------------- */
+ const handleAddComment = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return alert("Login first");
 
-      if (!token) {
-        alert("You are not logged in");
-        return;
+    if (!commentText.trim()) return;
+
+    const res = await axios.post(
+      `${baseUrl}/post/comment/${id}`,
+      { text: commentText },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    
-      // TODO: Implement comment posting logic
-      console.log("Adding comment...");
-    } catch (error) {
-      console.error("Comment failed", error);
-    }
-  };
+    );
+
+    // 🔥 YAHI MAIN FIX HAI
+    setLocalComments((prev) => [...prev, res.data.comment]);
+    setCommentText("");
+  } catch (err) {
+    console.log("error", err);
+  }
+};
+
 
   /* -------------------- Close menu on outside click -------------------- */
   useEffect(() => {
@@ -181,15 +195,16 @@ const PostCard: React.FC<PostCardProps> = ({
       <div className="items-center mt-4">
         <h3 className="text-lg font-semibold">Comments</h3>
         <div className="mt-2 max-h-40 overflow-y-auto">
-          {comments && comments.length > 0 ? (
-            comments.map((comment) => (
-              <div key={comment.id} className="border-b py-2">
-                <p className="text-sm">{comment.text}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-sm text-gray-500">No comments yet.</p>
-          )}
+        {localComments.length > 0 ? (
+  localComments.map((comment: any) => (
+    <div key={comment._id} className="border-b py-2">
+      <p className="text-sm">{comment.text}</p>
+    </div>
+  ))
+) : (
+  <p className="text-sm text-gray-500">No comments yet.</p>
+)}
+
         </div>
       </div>
 
@@ -199,6 +214,8 @@ const PostCard: React.FC<PostCardProps> = ({
           type="text"
           placeholder="Add a comment..."
           className="flex grow px-4 py-2 focus:outline-none bg-transparent"
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
         />
         <button
           className="bg-blue-600 text-white px-4 py-1 rounded-full hover:bg-blue-700 transition"
