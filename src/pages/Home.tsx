@@ -3,7 +3,7 @@ import PostCard from "../components/Post";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 
 interface Friend {
   _id: string;
@@ -27,7 +27,6 @@ interface Post {
 }
 
 const Home: React.FC = () => {
-  const navigator = useNavigate();
   const [text, setText] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
@@ -427,10 +426,10 @@ const Home: React.FC = () => {
               <img
                 src={myProfilePic}
                 alt="Profile"
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md flex-shrink-0 ring-2 ring-gray-200"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md shrink-0 ring-2 ring-gray-200"
               />
             ) : (
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-linear-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-linear-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center shadow-md shrink-0">
                 <span className="text-white font-bold text-base md:text-lg">
                   U
                 </span>
