@@ -3,6 +3,7 @@ import PostCard from "../components/Post";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Friend {
   _id: string;
@@ -26,6 +27,7 @@ interface Post {
 }
 
 const Home: React.FC = () => {
+  const navigator = useNavigate();
   const [text, setText] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
