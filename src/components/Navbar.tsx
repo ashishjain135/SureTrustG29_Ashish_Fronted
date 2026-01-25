@@ -73,6 +73,13 @@ const Navbar: React.FC = () => {
     fetchUnreadCount();
   }, [isLoginPage, location.pathname]);
 
+// use for started sign up button in login page
+  useEffect(() => {
+  const open = () => setOpenPopup(true);
+  document.addEventListener("open-login", open);
+  return () => document.removeEventListener("open-login", open);
+}, []);
+
   const handleSelectUser = (userId: string) => {
     setShowDropdown(false);
     setSearchText("");

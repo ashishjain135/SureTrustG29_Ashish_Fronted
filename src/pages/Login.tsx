@@ -20,16 +20,20 @@ const Login = () => {
                 Join millions of people sharing moments, making friends, and building communities on SMA - where every connection matters.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link to="/register">
-                  <button className="w-full sm:w-auto bg-white text-red-600 font-bold py-4 px-8 rounded-full hover:bg-gray-50 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <button
+                    onClick={() => {
+                      document.dispatchEvent(new Event("open-login"));
+                    }}
+                    className="w-full sm:w-auto bg-white text-red-600 font-bold py-4 px-8 rounded-full hover:bg-gray-50 shadow-2xl transform hover:scale-105 transition-all duration-300">
                     Get Started Free
                   </button>
-                </Link>
-                <Link to="/login">
-                  <button className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white/10 transition-all duration-300">
-                    Sign In
+                  <button 
+                    onClick={() => {document.dispatchEvent(new Event("open-login"));
+                    }}
+                    className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white/10 transition-all duration-300">
+                      Sign In
                   </button>
-                </Link>
+                
               </div>
               
               {/* Stats */}
