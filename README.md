@@ -3,7 +3,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://suretrustg29-ashish-fronted.onrender.com/login)
 
-##🚀 PulseNet – Social Media Platform
+#🚀 PulseNet – Social Media Platform
 PulseNet is a full-stack social media web application developed as a group project during the Sure Trust Internship.
 The platform allows users to connect, share posts, like & comment, and chat with friends in real time using modern web technologies.
 
